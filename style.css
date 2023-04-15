@@ -94,6 +94,15 @@ a {
     height: 200px;
     border-radius: 50%;
     border: 2px solid #fff;
+    transition: transform 0.2s ease-in-out;
+}
+
+.profile-img:hover {
+    transform: rotate(4deg);
+}
+
+.profile-img:active {
+    box-shadow: 2px 5px 5px 1px;
 }
 
 /* media queries */
