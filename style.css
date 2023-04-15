@@ -106,7 +106,28 @@ a {
         padding: 5rem 0 0;
     }
 
+    .section-1 h2 {
+        font-size: 1.4rem;
+    }
+
+    .section-1 a {
+        font-size: 1.2rem;
+    }
+
     .section-2 {
-        padding: 2rem 0 0 1.5rem;
+        padding: 2.5rem 0 0 5rem;
+    }
+
+    .section-2 h2 {
+        font-size: 1.4rem;
+    }
+
+    .section-2 a {
+        font-size: 1.2rem;
+    }
+
+    .profile-img {
+        width: 150px;
+        height: 150px;
     }
 }
