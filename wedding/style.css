@@ -179,7 +179,7 @@ a:hover{
     justify-content: space-between;
 }
 .home-img{
-    background-image: url(https://firebasestorage.googleapis.com/v0/b/chuck-842bb.appspot.com/o/GurAmanWed%2Fpic1.jpg?alt=media&token=5dbf5af2-354b-464c-9db2-7da57b484eda);
+    background-image: url(../assets/home.png);
     background-size: cover;
     background-position: center;
 }
@@ -191,7 +191,7 @@ a:hover{
 }
 #home-img-lg{
     display: block;
-    height: 110vh;
+    height: 100vh;
     width: 50vw;
     background-position-x: -100px;
 }
@@ -212,7 +212,7 @@ a:hover{
 .countdown-container {
     display: flex;
     justify-content: center;
-    gap: 3rem;
+    gap: 4rem;
     margin-top: 8vh;
     font-size: 2rem;
     text-align: center;
@@ -224,7 +224,18 @@ a:hover{
     font-weight: bold;
     animation: pulse 3s infinite;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 2vh;
+}
+
+@media (max-width:1000px){
+    .countdown-container {
+        gap: 2rem;
+        font-size: 1.8rem;
+    }
+    
+    .countdown-box span {
+        font-size: 3rem;
+    }
 }
 
 @keyframes pulse {
@@ -257,7 +268,7 @@ a:hover{
     margin: 8vh 0;
 }
 .timeline-img{
-    background-image: url(https://firebasestorage.googleapis.com/v0/b/chuck-842bb.appspot.com/o/GurAmanWed%2Fpic2.jpg?alt=media&token=7a0e5f94-d68e-4d32-bd3b-2a82b7acd40c);
+    background-image: url(../assets/timeline.png);
     height: 70vh;
     width: 30vw;
     background-position: center;
