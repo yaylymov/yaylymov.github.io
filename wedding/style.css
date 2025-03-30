@@ -1,7 +1,6 @@
 /* <===================TYPOGRAPHY & FONTS===================> */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Quicksand&display=swap');
-
 /* <===================CSS VARIABLES===================> */
 
 :root{
@@ -140,6 +139,9 @@ a:hover{
     .hz-margin {
         padding: 0 8rem;
       }
+      .home h1 {
+        text-align: center;
+      }
 }
 @media (max-width:570px){
     .checkbtn{
@@ -174,6 +176,9 @@ a:hover{
     .hz-margin {
         padding: 0 4rem;
       }
+      .home h1 {
+        text-align: center;
+      }
 }
 
 /* <===================HOME===================> */
@@ -201,6 +206,7 @@ a:hover{
     width: 50vw;
     background-position-x: -100px;
 }
+  
 @media (max-width:1000px){
     .container-out{
         flex-direction: column;
@@ -210,7 +216,7 @@ a:hover{
     }
     #home-img-lg{
         display: none;
-    }
+    } 
 }
 
 /* <===================COUNTDOWN===================> */
