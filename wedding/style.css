@@ -137,6 +137,9 @@ a:hover{
     html{
         font-size: 10px;
     }
+    .hz-margin {
+        padding: 0 8rem;
+      }
 }
 @media (max-width:570px){
     .checkbtn{
@@ -168,6 +171,9 @@ a:hover{
     #check:checked ~ ul{
         left: 0;
     }
+    .hz-margin {
+        padding: 0 4rem;
+      }
 }
 
 /* <===================HOME===================> */
