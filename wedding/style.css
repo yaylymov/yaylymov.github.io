@@ -207,6 +207,38 @@ a:hover{
     }
 }
 
+/* <===================COUNTDOWN===================> */
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 8vh;
+    font-size: 2rem;
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.countdown-box span {
+    font-size: 4rem;
+    font-weight: bold;
+    animation: pulse 3s infinite;
+    display: block;
+    margin-bottom: 8px;
+}
+
+@keyframes pulse {
+    0% { color: #212121; text-shadow: none; }
+    50% { color: #ffa07a; text-shadow: 0 0 10px rgba(255, 160, 122, 0.6); }
+    100% { color: #212121; text-shadow: none; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
 /* <===================TIMELINE===================> */
 
 .timeline{
