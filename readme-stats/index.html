@@ -2,33 +2,64 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Most Used Languages</title>
+  <title>Language Usage</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
       background-color: #0d1117;
       color: white;
-      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
       padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .bar {
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .bar-container {
+      width: 90%;
+      max-width: 600px;
       height: 20px;
-      border-radius: 5px;
-      background-color: #4c8eda;
-      margin: 0.5rem 0;
+      background-color: #2e2e2e;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
     }
-    .label {
-      margin-bottom: 0.3rem;
-      font-weight: bold;
+
+    .bar-segment {
+      height: 100%;
     }
-    .language-block {
-      margin-bottom: 1.5rem;
+
+    .legend {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      display: inline-block;
     }
   </style>
 </head>
 <body>
   <h1>📊 Most Used Languages</h1>
-  <div id="language-stats">Loading...</div>
+  <div class="bar-container" id="bar"></div>
+  <div class="legend" id="legend">Loading...</div>
   <script src="language-usage.js"></script>
 </body>
 </html>

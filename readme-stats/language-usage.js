@@ -1,44 +1,72 @@
 const username = "yaylymov";
 const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 
-async function getLanguages() {
+async function getLanguageStats() {
   const reposRes = await fetch(apiURL);
   const repos = await reposRes.json();
 
-  const languageData = {};
+  const languageTotals = {};
   let totalBytes = 0;
 
   for (const repo of repos) {
     if (repo.fork) continue;
 
     const langRes = await fetch(repo.languages_url);
-    const langJSON = await langRes.json();
+    const langData = await langRes.json();
 
-    for (const [lang, bytes] of Object.entries(langJSON)) {
-      languageData[lang] = (languageData[lang] || 0) + bytes;
+    for (const [lang, bytes] of Object.entries(langData)) {
+      languageTotals[lang] = (languageTotals[lang] || 0) + bytes;
       totalBytes += bytes;
     }
   }
 
-  const sorted = Object.entries(languageData)
-    .sort((a, b) => b[1] - a[1])
+  // Convert to array and sort
+  const sorted = Object.entries(languageTotals)
     .map(([lang, bytes]) => ({
       lang,
-      percent: ((bytes / totalBytes) * 100).toFixed(2)
-    }));
+      bytes,
+      percent: (bytes / totalBytes) * 100
+    }))
+    .sort((a, b) => b.percent - a.percent);
 
-  const container = document.getElementById("language-stats");
-  container.innerHTML = "";
+  // Group languages under 0.1% into "Others"
+  const visible = sorted.filter(item => item.percent >= 0.1);
+  const others = sorted.filter(item => item.percent < 0.1);
+  const otherTotal = others.reduce((acc, cur) => acc + cur.percent, 0);
 
-  sorted.forEach(item => {
-    const block = document.createElement("div");
-    block.className = "language-block";
-    block.innerHTML = `
-      <div class="label">${item.lang}: ${item.percent}%</div>
-      <div class="bar" style="width:${item.percent}%"></div>
+  if (otherTotal > 0) {
+    visible.push({ lang: "Others", percent: otherTotal });
+  }
+
+  // Generate color palette (just cycling hues)
+  const colors = {};
+  visible.forEach((item, i) => {
+    const hue = (i * 47) % 360; // Spread hues
+    colors[item.lang] = `hsl(${hue}, 70%, 60%)`;
+  });
+
+  // Render bar
+  const bar = document.getElementById("bar");
+  visible.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "bar-segment";
+    div.style.width = `${item.percent.toFixed(2)}%`;
+    div.style.backgroundColor = colors[item.lang];
+    bar.appendChild(div);
+  });
+
+  // Render legend
+  const legend = document.getElementById("legend");
+  legend.innerHTML = "";
+  visible.forEach(item => {
+    const entry = document.createElement("div");
+    entry.className = "legend-item";
+    entry.innerHTML = `
+      <span class="legend-color" style="background:${colors[item.lang]}"></span>
+      ${item.lang} (${item.percent.toFixed(2)}%)
     `;
-    container.appendChild(block);
+    legend.appendChild(entry);
   });
 }
 
-getLanguages();
+getLanguageStats();
