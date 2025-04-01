@@ -112,7 +112,7 @@ nav ul li a{
     text-decoration: none;
 }
 a:hover{
-    color: orange;
+    color: #914646;
     transition: .5s;
 }
 .checkbtn{
@@ -184,7 +184,7 @@ a:hover{
 /* <===================HOME===================> */
 
 .container-out{
-    margin-top: 10vh;
+    margin-top: 9vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -205,6 +205,11 @@ a:hover{
     height: 100vh;
     width: 50vw;
     background-position-x: -100px;
+}
+
+.home h1{
+    font-size: 6rem;
+    margin: auto;
 }
   
 @media (max-width:1000px){
@@ -239,6 +244,15 @@ a:hover{
     margin-bottom: 2vh;
 }
 
+.countdown-section {
+    margin: 10vh auto;
+    text-align: center;
+}
+.countdown-section h2 {
+    font-size: 3rem;
+    margin-bottom: 3vh;
+}
+
 @media (max-width:1000px){
     .countdown-container {
         gap: 2rem;
@@ -259,6 +273,28 @@ a:hover{
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* <===================WEDDING DATE===================> */
+.wedding-date {
+    text-align: center;
+    font-size: 4.5rem;
+    font-weight: bold;
+    margin: 2vh 0;
+    animation: floatIn 2s ease-out;
+    color: #914646; /* soft romantic tone */
+}
+
+@keyframes floatIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -288,6 +324,7 @@ a:hover{
 }
 .timings{
     margin: 30px;
+    padding-left: 4rem;
 }
 .timeline-container .text{
     padding: 1rem 0 1rem 4rem;
