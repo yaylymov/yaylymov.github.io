@@ -1,42 +1,44 @@
-// language-usage.js
-const GITHUB_USERNAME = "yaylymov"; 
+const username = "yaylymov";
+const apiURL = `https://api.github.com/users/${username}/repos?per_page=100`;
 
-async function fetchLanguages() {
-  const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`);
-  const repos = await response.json();
+async function getLanguages() {
+  const reposRes = await fetch(apiURL);
+  const repos = await reposRes.json();
 
-  const languageTotals = {};
+  const languageData = {};
   let totalBytes = 0;
 
   for (const repo of repos) {
-    if (repo.fork) continue; // skip forks
-    const langResponse = await fetch(repo.languages_url);
-    const langData = await langResponse.json();
+    if (repo.fork) continue;
 
-    for (const [lang, bytes] of Object.entries(langData)) {
-      languageTotals[lang] = (languageTotals[lang] || 0) + bytes;
+    const langRes = await fetch(repo.languages_url);
+    const langJSON = await langRes.json();
+
+    for (const [lang, bytes] of Object.entries(langJSON)) {
+      languageData[lang] = (languageData[lang] || 0) + bytes;
       totalBytes += bytes;
     }
   }
 
-  const sortedLanguages = Object.entries(languageTotals)
+  const sorted = Object.entries(languageData)
     .sort((a, b) => b[1] - a[1])
     .map(([lang, bytes]) => ({
-      name: lang,
-      percentage: ((bytes / totalBytes) * 100).toFixed(2)
+      lang,
+      percent: ((bytes / totalBytes) * 100).toFixed(2)
     }));
 
   const container = document.getElementById("language-stats");
-  sortedLanguages.forEach(lang => {
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <strong>${lang.name}:</strong> ${lang.percentage}%<br>
-      <div style="background:#eee;height:10px;width:100%;border-radius:5px;overflow:hidden;margin-bottom:10px;">
-        <div style="background:#4c8eda;width:${lang.percentage}%;height:100%;"></div>
-      </div>
+  container.innerHTML = "";
+
+  sorted.forEach(item => {
+    const block = document.createElement("div");
+    block.className = "language-block";
+    block.innerHTML = `
+      <div class="label">${item.lang}: ${item.percent}%</div>
+      <div class="bar" style="width:${item.percent}%"></div>
     `;
-    container.appendChild(div);
+    container.appendChild(block);
   });
 }
 
-fetchLanguages();
+getLanguages();
